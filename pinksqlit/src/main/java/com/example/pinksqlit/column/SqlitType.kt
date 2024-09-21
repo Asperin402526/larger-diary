@@ -7,7 +7,6 @@ enum class SqlitType(val type: String) {
 
     /** строка текста в одинарных кавычках, которая сохраняется в кодировке базы данных (UTF-8, UTF-16BE или UTF-16LE)*/
     TEXT("TEXT"),
-    BOOLEAN("INTEGER"),
 
     /** указывает фактически на отсутствие значения*/
     NULL("NULL"),

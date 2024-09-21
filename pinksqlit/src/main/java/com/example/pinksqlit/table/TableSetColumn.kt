@@ -5,6 +5,7 @@ import com.example.pinksqlit.column.InColumnEntity
 import com.example.pinksqlit.column.PrimaryKey
 import com.example.pinksqlit.column.type.ColumnBoolean
 import com.example.pinksqlit.column.type.ColumnByte
+import com.example.pinksqlit.column.type.ColumnChar
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
@@ -44,6 +45,16 @@ abstract class TableSetColumn<E>:TableInitializing(){
             tableName = tableName,
             columnName = nameColumn,
             unique = unique
+        )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun char(nameColumn:String, mapValue:(entity:E)->Char?): ColumnChar<E> {
+        val newColumn = ColumnChar<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn
         )
         columnList.add(newColumn)
         return newColumn

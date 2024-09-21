@@ -3,6 +3,7 @@ package com.example.pinksqlit.table
 import com.example.pinksqlit.column.Autoincrement
 import com.example.pinksqlit.column.InColumnEntity
 import com.example.pinksqlit.column.PrimaryKey
+import com.example.pinksqlit.column.type.ColumnBoolean
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
@@ -32,6 +33,16 @@ abstract class TableSetColumn<E>:TableInitializing(){
             tableName = tableName,
             columnName = nameColumn,
             unique = unique
+        )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun boolean(nameColumn:String, mapValue:(entity:E)->Boolean?): ColumnBoolean<E> {
+        val newColumn = ColumnBoolean<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn
         )
         columnList.add(newColumn)
         return newColumn

@@ -4,6 +4,7 @@ import com.example.pinksqlit.column.Autoincrement
 import com.example.pinksqlit.column.InColumnEntity
 import com.example.pinksqlit.column.PrimaryKey
 import com.example.pinksqlit.column.type.ColumnBoolean
+import com.example.pinksqlit.column.type.ColumnByte
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
@@ -22,6 +23,16 @@ abstract class TableSetColumn<E>:TableInitializing(){
             autoincrement=autoincrement,
             unique = unique
             )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun byte(nameColumn:String, mapValue:(entity:E)->Byte?): ColumnByte<E> {
+        val newColumn = ColumnByte<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn,
+        )
         columnList.add(newColumn)
         return newColumn
     }

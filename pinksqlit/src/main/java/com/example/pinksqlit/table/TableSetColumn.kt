@@ -8,6 +8,7 @@ import com.example.pinksqlit.column.type.ColumnByte
 import com.example.pinksqlit.column.type.ColumnChar
 import com.example.pinksqlit.column.type.ColumnDouble
 import com.example.pinksqlit.column.type.ColumnEnum
+import com.example.pinksqlit.column.type.ColumnFloat
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
@@ -73,6 +74,16 @@ abstract class TableSetColumn<E>:TableInitializing(){
     }
     protected fun boolean(nameColumn:String, mapValue:(entity:E)->Boolean?): ColumnBoolean<E> {
         val newColumn = ColumnBoolean<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn
+        )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun float(nameColumn:String, mapValue:(entity:E)->Float?): ColumnFloat<E> {
+        val newColumn = ColumnFloat<E>(
             position = columnList.size,
             mapValue = mapValue,
             tableName = tableName,

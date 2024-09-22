@@ -10,16 +10,16 @@ import com.example.pinksqlit.model.Unique
 
 class ColumnShort<E>(
     override val position: Int,
-    override val mapValue: (entity: E) -> Long?,
+    override val mapValue: (entity: E) -> Short?,
     override val tableName: TableName,
     override val columnName: String,
     override val primaryKey: PrimaryKey,
     override val autoincrement: Autoincrement,
 
-) :ColumnSqlit<E,Long>() {
+) :ColumnSqlit<E,Short>() {
     override val sqlitType: SqlitType = SqlitType.INTEGER
     override val unique: Unique = Unique.No
-    override fun getValue(cursor: Cursor?): Long? = cursor?.getLong(position)
+    override fun getValue(cursor: Cursor?): Short? = cursor?.getShort(position)
 
-    override fun valueToString(velue: Long?): String = velue.toString()
+    override fun valueToString(velue: Short?): String = velue.toString()
 }

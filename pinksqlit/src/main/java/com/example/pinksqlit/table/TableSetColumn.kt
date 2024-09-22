@@ -11,6 +11,7 @@ import com.example.pinksqlit.column.type.ColumnEnum
 import com.example.pinksqlit.column.type.ColumnFloat
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnLong
+import com.example.pinksqlit.column.type.ColumnShort
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
 
@@ -18,7 +19,7 @@ import com.example.pinksqlit.model.Unique
 abstract class TableSetColumn<E>:TableInitializing(){
 
     protected val columnList: MutableList<InColumnEntity<E>> = mutableListOf()
-    protected fun int(nameColumn:String, primaryKey: PrimaryKey = PrimaryKey.No, autoincrement: Autoincrement = Autoincrement.No, unique: Unique = Unique.No, mapValue:(entity:E)->Int?): ColumnInt<E> {
+    protected fun int(nameColumn:String, primaryKey: PrimaryKey = PrimaryKey.No, autoincrement: Autoincrement = Autoincrement.No, mapValue:(entity:E)->Int?): ColumnInt<E> {
         val newColumn = ColumnInt<E>(
             position = columnList.size,
             mapValue = mapValue,
@@ -26,13 +27,25 @@ abstract class TableSetColumn<E>:TableInitializing(){
             columnName = nameColumn,
             primaryKey = primaryKey,
             autoincrement=autoincrement,
-            unique = unique
+            unique = Unique.No
             )
         columnList.add(newColumn)
         return newColumn
     }
     protected fun long(nameColumn:String, primaryKey: PrimaryKey = PrimaryKey.No, autoincrement: Autoincrement = Autoincrement.No, mapValue:(entity:E)->Long?): ColumnLong<E> {
         val newColumn = ColumnLong<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn,
+            primaryKey = primaryKey,
+            autoincrement=autoincrement,
+            )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun short(nameColumn:String, primaryKey: PrimaryKey = PrimaryKey.No, autoincrement: Autoincrement = Autoincrement.No, mapValue:(entity:E)->Short?): ColumnShort<E> {
+        val newColumn = ColumnShort<E>(
             position = columnList.size,
             mapValue = mapValue,
             tableName = tableName,

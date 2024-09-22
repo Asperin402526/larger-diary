@@ -82,12 +82,13 @@ abstract class TableSetColumn<E>:TableInitializing(){
         columnList.add(newColumn)
         return newColumn
     }
-    protected fun float(nameColumn:String, mapValue:(entity:E)->Float?): ColumnFloat<E> {
+    protected fun float(nameColumn:String, unique: Unique = Unique.No, mapValue:(entity:E)->Float?): ColumnFloat<E> {
         val newColumn = ColumnFloat<E>(
             position = columnList.size,
             mapValue = mapValue,
             tableName = tableName,
-            columnName = nameColumn
+            columnName = nameColumn,
+            unique=unique
         )
         columnList.add(newColumn)
         return newColumn

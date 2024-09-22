@@ -10,6 +10,7 @@ import com.example.pinksqlit.column.type.ColumnDouble
 import com.example.pinksqlit.column.type.ColumnEnum
 import com.example.pinksqlit.column.type.ColumnFloat
 import com.example.pinksqlit.column.type.ColumnInt
+import com.example.pinksqlit.column.type.ColumnLong
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
 
@@ -26,6 +27,18 @@ abstract class TableSetColumn<E>:TableInitializing(){
             primaryKey = primaryKey,
             autoincrement=autoincrement,
             unique = unique
+            )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun long(nameColumn:String, primaryKey: PrimaryKey = PrimaryKey.No, autoincrement: Autoincrement = Autoincrement.No, mapValue:(entity:E)->Long?): ColumnLong<E> {
+        val newColumn = ColumnLong<E>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn,
+            primaryKey = primaryKey,
+            autoincrement=autoincrement,
             )
         columnList.add(newColumn)
         return newColumn

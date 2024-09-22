@@ -7,6 +7,7 @@ import com.example.pinksqlit.column.type.ColumnBoolean
 import com.example.pinksqlit.column.type.ColumnByte
 import com.example.pinksqlit.column.type.ColumnChar
 import com.example.pinksqlit.column.type.ColumnDouble
+import com.example.pinksqlit.column.type.ColumnEnum
 import com.example.pinksqlit.column.type.ColumnInt
 import com.example.pinksqlit.column.type.ColumnString
 import com.example.pinksqlit.model.Unique
@@ -76,6 +77,17 @@ abstract class TableSetColumn<E>:TableInitializing(){
             mapValue = mapValue,
             tableName = tableName,
             columnName = nameColumn
+        )
+        columnList.add(newColumn)
+        return newColumn
+    }
+    protected fun <EN:Enum<EN>>enum(nameColumn:String,enumArray:Array<EN>, mapValue:(entity:E)->EN?): ColumnEnum<E,EN>{
+        val newColumn = ColumnEnum<E,EN>(
+            position = columnList.size,
+            mapValue = mapValue,
+            tableName = tableName,
+            columnName = nameColumn,
+            enumArray = enumArray
         )
         columnList.add(newColumn)
         return newColumn
